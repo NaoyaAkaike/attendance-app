@@ -3,7 +3,7 @@ export const Header = () => {
 
 
     return(
-        <div>
+        <div class="app">
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -20,20 +20,20 @@ export const Header = () => {
     
                         <ul class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/Login">Login</a>
+                                        <a class="nav-link" href="/">Login</a>
                                     </li>
     
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/Register">Register</a>
+                                        <a class="nav-link" href="/register">Register</a>
                                     </li>
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre="true">
                                         name
                                     </a>
     
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
+                                           onClick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>

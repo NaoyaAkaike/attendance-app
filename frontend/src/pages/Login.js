@@ -40,10 +40,10 @@ export const Login = () => {
     }
 
     return (
-        <div>
+        <>
             <HeadTtag></HeadTtag>
+            <Header></Header>
             <div id="app">
-                <Header></Header>
                 <main class="py-4">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -53,10 +53,10 @@ export const Login = () => {
 
                                     <div class="card-body">
                                         <div class="row mb-3">
-                                            <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
+                                            <label htmlFor="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
 
                                             <div class="col-md-6">
-                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value={email} onChange={onChangeEmail} required autocomplete="email" autofocus></input>
+                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value={email} onChange={onChangeEmail} required autoComplete="email" autoFocus></input>
 
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> $message </strong>
@@ -65,10 +65,10 @@ export const Login = () => {
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
+                                            <label htmlFor="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
                                             <div class="col-md-6">
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value={password} onChange={onChangePassword} required autocomplete="current-password"></input>
+                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value={password} onChange={onChangePassword} required autoComplete="current-password"></input>
 
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong> $message </strong>
@@ -81,7 +81,7 @@ export const Login = () => {
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" checked></input>
 
-                                                    <label class="form-check-label" for="remember">
+                                                    <label class="form-check-label" htmlFor="remember">
                                                         Remember Me
                                                     </label>
                                                 </div>
@@ -106,7 +106,7 @@ export const Login = () => {
                     </div>
                 </main>
             </div>
-        </div>
+        </>
     )
 } 
 
