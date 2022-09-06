@@ -26,3 +26,7 @@ Route::post('/api-register', [\App\Http\Controllers\ApiAuthController::class, 'r
 Route::post('/api-login'   , [\App\Http\Controllers\ApiAuthController::class, 'login']);
 Route::post('/api-logout'   , [\App\Http\Controllers\ApiAuthController::class, 'logout']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

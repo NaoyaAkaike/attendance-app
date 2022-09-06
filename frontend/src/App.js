@@ -3,7 +3,13 @@ import { TestAapi } from "./pages/TestApi";
 
 function App() {
   return (
-    <TestAapi />
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TopPage />} />
+          <Route path="/add" element={<AddTodoPage />} />
+          <Route path="/edit" element={<EditTodoPage />} />
+        </Routes>
+      </BrowserRouter>
   );
 }
 
