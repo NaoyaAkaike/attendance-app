@@ -8,6 +8,7 @@ export const TestAapi = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [cookie, setCookie] = useState(document.cookie)
 
     const onChangeName = (e) => {
         setName(e.target.value)
@@ -18,23 +19,27 @@ export const TestAapi = () => {
     const onChangePassword = (e) => {
         setPassword(e.target.value)
     }
+    const instance = axios.create({
+        withCredentials : true
+    })
 
     const doLogin = () => {
-        const instance = axios.create({
-            withCredentials : true
-        })
         instance
             .get('http://localhost:8080/sanctum/csrf-cookie/')
-            .then(() => {
+            .then((response) => {
+                console.log(response)
+                setCookie(document.cookie)
+
                 instance
-                    .post("http://localhost:8080/api-login/", {
-                        //name: name,
-                        email: email,
-                        password: password
-                    })
+                    .post('http://localhost:8080/api-login',{
+                        email : email,
+                        password : password
+                        }
+                    )
                     .then((response) => {
-                        console.log("api login result");
+                        console.log("api login result")
                         console.log(response)
+                        setCookie(document.cookie)
                         getUser()
                     })
                     .catch((error) => {
@@ -42,23 +47,21 @@ export const TestAapi = () => {
                         console.log(error)
                     });
             })
+        
+        
     }
 
     const getUser = () => {
         setStatus('問い合わせ中 ...............');
-
-        const instance = axios.create({
-            withCredentials: true
-        })
 
         setTimeout(() => {
             instance.get('http://localhost:8080/api/user/')
                 .then((response) => {
                     console.log('● ログイン中のユーザー情報');
                     console.log(response.data);
-                    console.log(document.cookie.split(";"))
                     setUser(response.data.name);
                     setStatus('ログイン中 ( name : ' + response.data.name + ' / email : ' + response.data.email + ' )' );
+                    setCookie(document.cookie)
                 })
                 .catch((error) => {
                     setStatus('未ログイン');
@@ -69,10 +72,6 @@ export const TestAapi = () => {
     }
 
     const doLogout = () => {
-        
-        const instance = axios.create({
-            withCredentials : true
-        })
 
         instance
             .post("http://localhost:8080/api-logout/", {
@@ -93,8 +92,8 @@ export const TestAapi = () => {
 
     return (
         <div>
-            {/* <form action="/api-login/" @submit.prevent="doLogin"> */}
             <h5>ログイン</h5>
+            {/* <p>{cookie}</p> */}
             <p>name</p>
             <input type="text" value={name} onChange={onChangeName}></input>
             <p>email</p>
