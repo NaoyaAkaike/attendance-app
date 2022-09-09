@@ -8,6 +8,7 @@ export const TestAapi = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [cookie, setCookie] = useState(document.cookie)
 
     const onChangeName = (e) => {
         setName(e.target.value)
@@ -23,18 +24,28 @@ export const TestAapi = () => {
     })
 
     const doLogin = () => {
+<<<<<<< HEAD:frontend/src/pages/TestApi.jsx
          instance
              .get('http://localhost:8080/sanctum/csrf-cookie/')
              .then(() => {
+=======
+        instance
+            .get('http://localhost:8080/sanctum/csrf-cookie/')
+            .then((response) => {
+                console.log(response)
+                setCookie(document.cookie)
+
+>>>>>>> 63422600548b316a08ae640589b825f5f5439d5c:frontend/src/pages/TestApi.js
                 instance
-                    .post("http://localhost:8080/api-login/", {
-                        //name: name,
-                        email: email,
-                        password: password
-                    })
+                    .post('http://localhost:8080/api-login',{
+                        email : email,
+                        password : password
+                        }
+                    )
                     .then((response) => {
-                        console.log("api login result");
+                        console.log("api login result")
                         console.log(response)
+                        setCookie(document.cookie)
                         getUser()
                     })
                     .catch((error) => {
@@ -42,6 +53,8 @@ export const TestAapi = () => {
                         console.log(error)
                     });
             })
+        
+        
     }
 
     const getUser = () => {
@@ -54,6 +67,7 @@ export const TestAapi = () => {
                     console.log(response.data);
                     setUser(response.data.name);
                     setStatus('ログイン中 ( name : ' + response.data.name + ' / email : ' + response.data.email + ' )' );
+                    setCookie(document.cookie)
                 })
                 .catch((error) => {
                     setStatus('未ログイン');
@@ -64,7 +78,11 @@ export const TestAapi = () => {
     }
 
     const doLogout = () => {
+<<<<<<< HEAD:frontend/src/pages/TestApi.jsx
         
+=======
+
+>>>>>>> 63422600548b316a08ae640589b825f5f5439d5c:frontend/src/pages/TestApi.js
         instance
             .post("http://localhost:8080/api-logout/", {
                 name: name,
@@ -85,6 +103,7 @@ export const TestAapi = () => {
     return (
         <div>
             <h5>ログイン</h5>
+            {/* <p>{cookie}</p> */}
             <p>name</p>
             <input type="text" value={name} onChange={onChangeName}></input>
             <p>email</p>
