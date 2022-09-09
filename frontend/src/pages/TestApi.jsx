@@ -24,18 +24,9 @@ export const TestAapi = () => {
     })
 
     const doLogin = () => {
-<<<<<<< HEAD:frontend/src/pages/TestApi.jsx
          instance
              .get('http://localhost:8080/sanctum/csrf-cookie/')
              .then(() => {
-=======
-        instance
-            .get('http://localhost:8080/sanctum/csrf-cookie/')
-            .then((response) => {
-                console.log(response)
-                setCookie(document.cookie)
-
->>>>>>> 63422600548b316a08ae640589b825f5f5439d5c:frontend/src/pages/TestApi.js
                 instance
                     .post('http://localhost:8080/api-login',{
                         email : email,
@@ -78,11 +69,6 @@ export const TestAapi = () => {
     }
 
     const doLogout = () => {
-<<<<<<< HEAD:frontend/src/pages/TestApi.jsx
-        
-=======
-
->>>>>>> 63422600548b316a08ae640589b825f5f5439d5c:frontend/src/pages/TestApi.js
         instance
             .post("http://localhost:8080/api-logout/", {
                 name: name,
