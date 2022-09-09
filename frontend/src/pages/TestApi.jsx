@@ -18,14 +18,14 @@ export const TestAapi = () => {
     const onChangePassword = (e) => {
         setPassword(e.target.value)
     }
+    const instance = axios.create({
+        withCredentials : true
+    })
 
     const doLogin = () => {
-        const instance = axios.create({
-            withCredentials : true
-        })
-        instance
-            .get('http://localhost:8080/sanctum/csrf-cookie/')
-            .then(() => {
+         instance
+             .get('http://localhost:8080/sanctum/csrf-cookie/')
+             .then(() => {
                 instance
                     .post("http://localhost:8080/api-login/", {
                         //name: name,
@@ -47,16 +47,11 @@ export const TestAapi = () => {
     const getUser = () => {
         setStatus('問い合わせ中 ...............');
 
-        const instance = axios.create({
-            withCredentials: true
-        })
-
         setTimeout(() => {
             instance.get('http://localhost:8080/api/user/')
                 .then((response) => {
                     console.log('● ログイン中のユーザー情報');
                     console.log(response.data);
-                    console.log(document.cookie.split(";"))
                     setUser(response.data.name);
                     setStatus('ログイン中 ( name : ' + response.data.name + ' / email : ' + response.data.email + ' )' );
                 })
@@ -70,10 +65,6 @@ export const TestAapi = () => {
 
     const doLogout = () => {
         
-        const instance = axios.create({
-            withCredentials : true
-        })
-
         instance
             .post("http://localhost:8080/api-logout/", {
                 name: name,
@@ -93,7 +84,6 @@ export const TestAapi = () => {
 
     return (
         <div>
-            {/* <form action="/api-login/" @submit.prevent="doLogin"> */}
             <h5>ログイン</h5>
             <p>name</p>
             <input type="text" value={name} onChange={onChangeName}></input>
