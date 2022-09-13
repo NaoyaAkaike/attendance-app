@@ -1,31 +1,13 @@
-import axios from "axios";
-import { useContext } from "react";
-import { useNavigate } from "react-router"
-import { AuthContext } from "./Auth";
+import { useRecoilValue } from "recoil";
+import { userState } from "./Recoil";
+import { useAxios } from "./useAxios";
 
 export const Header = () => {
 
-    const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
-    const handleLogout = () => {
-        const instance = axios.create({
-            withCredentials : true
-        })
+    //const { userName } = useContext(AuthContext);
+    const userName = useRecoilValue(userState);
+    const{ handleLogout } = useAxios();
 
-        instance
-            .post("http://localhost:8080/api-logout/")
-            .then((response) => {
-                console.log("api logout result")
-                console.log(response)
-                setAuth("")
-                navigate("/")
-            })
-            .catch((error) => {
-                console.log("api logout error")
-                console.log(error)
-            });
-        
-    }
     return(
         <div className="app">
             <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -43,7 +25,7 @@ export const Header = () => {
                         </ul>
     
                         <ul className="navbar-nav ms-auto">
-                            { (auth == "")
+                            { (userName == "")
                             ?   <><li className="nav-item">
                                     <a className="nav-link" href="/">Login</a>
                                 </li>
@@ -54,25 +36,24 @@ export const Header = () => {
 
                             :   <><li className="nav-item dropdown">
                                     <a id="navbarDropdown" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {auth}
+                                        {userName}
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a className="dropdown-item">Logout</a>
                                     </div>
                                 </li>
                                 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                        <li><a className="dropdown-item" href="#">Action</a></li>
+                                        <li><a className="dropdown-item" href="#">Another action</a></li>
+                                        <li><a className="dropdown-item" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
                             
-                                
                                 <li className="nav-item">
                                     <a className="nav-link" href="#" onClick={handleLogout}>Logout</a>
                                 </li></>

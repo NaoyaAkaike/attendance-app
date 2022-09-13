@@ -1,9 +1,20 @@
+import { useEffect } from "react"
+import { useNavigate } from "react-router"
+import { useRecoilValue } from "recoil"
 import { Header } from "../components/Header"
 import { HeadTtag } from "../components/HeadTag"
+import { userState } from "../components/Recoil"
 
 
 
 export const Home = () => {
+
+    const userName = useRecoilValue(userState);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        !userName && navigate("/");
+    },[])    
 
     return (
         <>
@@ -17,7 +28,7 @@ export const Home = () => {
                                 <div className="card">
                                     <div className="card-header">Home</div>
                                     <div className="card-body">
-                                        welcome to tokyo
+                                        Hello {userName}!! , Welcome to tokyo
                                     </div>
                                 </div>
                             </div>
