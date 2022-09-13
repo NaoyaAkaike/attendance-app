@@ -1,7 +1,5 @@
 import { useCallback, useState } from "react";
 import { Header } from "../components/Header"
-import { HeadTtag } from "../components/HeadTag"
-import { userState } from "../components/Recoil";
 import { useAxios } from "../components/useAxios";
 
 export const Login = () => {
@@ -18,8 +16,7 @@ export const Login = () => {
 
     return (
         <>
-            <HeadTtag></HeadTtag>
-            <Header></Header>
+            <Header/>
             <div id="app">
                 <main className="py-4">
                     <div className="container">

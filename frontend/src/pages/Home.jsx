@@ -1,25 +1,28 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { Header } from "../components/Header"
-import { HeadTtag } from "../components/HeadTag"
 import { userState } from "../components/Recoil"
+import { useAxios } from "../components/useAxios"
 
 
 
 export const Home = () => {
 
-    const userName = useRecoilValue(userState);
+    const [ userName, setUserName ] = useRecoilState(userState);
     const navigate = useNavigate();
+    const { getUser } = useAxios();
 
     useEffect(() => {
-        !userName && navigate("/");
-    },[])    
+        getUser().then((name) => {
+            setUserName(name)
+        })
+        !userName && navigate("/")
+    },[])
 
     return (
         <>
-            <HeadTtag></HeadTtag>
-            <Header></Header>
+            <Header/>
             <div id="app">
                 <main className="py-4">
                     <div className="container">

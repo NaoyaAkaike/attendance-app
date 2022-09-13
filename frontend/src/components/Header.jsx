@@ -4,7 +4,6 @@ import { useAxios } from "./useAxios";
 
 export const Header = () => {
 
-    //const { userName } = useContext(AuthContext);
     const userName = useRecoilValue(userState);
     const{ handleLogout } = useAxios();
 
@@ -38,16 +37,8 @@ export const Header = () => {
                                     <a id="navbarDropdown" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {userName}
                                     </a>
-                                    <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item">Logout</a>
-                                    </div>
-                                </li>
-                                
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                    </a>
-                                    <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a className="dropdown-item" href="#" onClick={handleLogout}>Logout</a></li>
                                         <li><a className="dropdown-item" href="#">Action</a></li>
                                         <li><a className="dropdown-item" href="#">Another action</a></li>
                                         <li><a className="dropdown-item" href="#">Something else here</a></li>

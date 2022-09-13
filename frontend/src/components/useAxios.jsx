@@ -23,7 +23,7 @@ export const useAxios = () => {
             .catch((error) => {
                 console.log('未ログイン');
                 console.log(error)
-                return;
+                return "";
             });
     }
 

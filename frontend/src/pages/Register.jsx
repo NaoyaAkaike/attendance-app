@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { Header } from "../components/Header"
-import { HeadTtag } from "../components/HeadTag"
 import { useAxios } from "../components/useAxios";
 
 export const Register = () => {
@@ -26,8 +25,7 @@ export const Register = () => {
 
     return (
         <>
-            <HeadTtag></HeadTtag>
-            <Header></Header>
+            <Header/>
             <div className="app">
                 <main className="py-4">
                     <div className="container">
