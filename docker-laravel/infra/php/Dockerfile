@@ -17,5 +17,4 @@ WORKDIR /data
 
 #追記 by akaike
 COPY start.sh /start.sh
-RUN chmod 744 /start.sh
-CMD [ "/start.sh" ]
+RUN chmod 744 /start.sh && /start.sh
