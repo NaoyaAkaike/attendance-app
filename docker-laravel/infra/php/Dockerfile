@@ -14,3 +14,11 @@ RUN apt-get update && \
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /data
+
+#追記 by akaike
+CMD bash -c "chmod -R 777 storage bootstrap/cache && \
+  composer install && \
+  cp .env.example .env && \
+  php artisan key:generate && \
+  php artisan storage:link && \
+  php artisan migrate"

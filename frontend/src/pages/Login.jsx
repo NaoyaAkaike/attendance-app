@@ -1,10 +1,12 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
 import { Header } from "../components/Header"
 import { useAxios } from "../components/useAxios";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     const { handleLogin } =useAxios();
 
     const onChangeEmail = (e) => {
@@ -25,12 +27,11 @@ export const Login = () => {
                                 <div className="card">
                                     <div className="card-header">Login</div>
 
-                                    <div className="card-body was-validated" noValidate>
+                                    <div className="card-body">
                                         <div className="row mb-3">
                                             <label htmlFor="email" className="col-md-4 col-form-label text-md-end">Email Address</label>
 
                                             <div className="col-md-6">
-                                                {/* <input id="email" type="email" className="form-control @error('email') is-invalid @enderror" name="email" value={email} onChange={onChangeEmail} required autoComplete="email" autoFocus></input> */}
                                             <input id="email" type="email" className="form-control" name="email" value={email} onChange={onChangeEmail} required autoComplete="email" autoFocus></input>
 
                                                 <span className="invalid-feedback" role="alert">
@@ -54,7 +55,7 @@ export const Login = () => {
                                         <div className="row mb-3">
                                             <div className="col-md-6 offset-md-4">
                                                 <div className="form-check">
-                                                    <input className="form-check-input" type="checkbox" name="remember" id="remember" defaultChecked></input>
+                                                    <input className="form-check-input" type="checkbox" name="remember" id="remember" ></input>
 
                                                     <label className="form-check-label" htmlFor="remember">
                                                         Remember Me
@@ -69,7 +70,7 @@ export const Login = () => {
                                                     Login
                                                 </button>
 
-                                                <a className="btn btn-link" href="{{ route('password.request') }}">
+                                                <a className="btn btn-link" href="#" onClick={()=> navigate("./password/email")}>
                                                     Forgot Your Password?
                                                 </a>
                                             </div>
