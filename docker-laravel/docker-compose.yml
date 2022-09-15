@@ -1,7 +1,10 @@
 version: "3.9"
 services:
   app:
-    build: ./infra/php
+    # build: ./infra/php
+    build:
+      context: .
+      dockerfile: ./infra/php/Dockerfile
     volumes:
       - ./src:/data
 

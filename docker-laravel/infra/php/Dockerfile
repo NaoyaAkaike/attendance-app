@@ -11,10 +11,16 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && \
   docker-php-ext-install intl pdo_mysql zip bcmath
 
-COPY ./php.ini /usr/local/etc/php/php.ini
+#COPY ./php.ini /usr/local/etc/php/php.ini
+COPY ./infra/php/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /data
 
 #追記 by akaike
-COPY start.sh /start.sh
-RUN chmod 744 /start.sh && /start.sh
+COPY ./src/ ./
+
+RUN composer install
+RUN chmod -R 777 storage bootstrap/cache
+RUN cp .env.example .env
+RUN php artisan key:generate && \
+  php artisan storage:link
