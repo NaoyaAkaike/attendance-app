@@ -16,5 +16,6 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 WORKDIR /data
 
 #追記 by akaike
-COPY start.sh /start.sh
-RUN chmod 744 /start.sh && /start.sh
+# COPY start.sh /start.sh
+# RUN chmod 744 /start.sh && /start.sh
+# CMD [ "/start.sh" ]
