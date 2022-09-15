@@ -1,7 +1,13 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
+import { Button } from "../components/button/Button";
+import { LinkButton } from "../components/button/LinkButton";
+import { Card } from "../components/Card";
 import { Header } from "../components/Header"
-import { useAxios } from "../components/useAxios";
+import { LabeledCheckBox } from "../components/LabeledCheckBox";
+import { EmailTextbox } from "../components/textbox/EmailTextbox";
+import { PasswordTextbox } from "../components/textbox/PasswordTextbox";
+import { useAxios } from "../function/useAxios";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -18,70 +24,29 @@ export const Login = () => {
 
     return (
         <>
+        <div id="app">
             <Header/>
-            <div id="app">
-                <main className="py-4">
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <div className="col-md-8">
-                                <div className="card">
-                                    <div className="card-header">Login</div>
 
-                                    <div className="card-body">
-                                        <div className="row mb-3">
-                                            <label htmlFor="email" className="col-md-4 col-form-label text-md-end">Email Address</label>
+            <Card cardTitle="Login">
+                <EmailTextbox label="Email Address" onChange={onChangeEmail}>
+                    {email}                                        
+                </EmailTextbox> 
 
-                                            <div className="col-md-6">
-                                            <input id="email" type="email" className="form-control" name="email" value={email} onChange={onChangeEmail} required autoComplete="email" autoFocus></input>
+                <PasswordTextbox label="Password" onChange={onChangePassword}>
+                    {password}
+                </PasswordTextbox>
 
-                                                <span className="invalid-feedback" role="alert">
-                                                    <strong> invalid mail address </strong>
-                                                </span>
-                                            </div>
-                                        </div>
+                <LabeledCheckBox label="Remember Me" />
 
-                                        <div className="row mb-3">
-                                            <label htmlFor="password" className="col-md-4 col-form-label text-md-end">Password</label>
+                <div className="row mb-0">
+                    <div className="col-md-8 offset-md-4">
+                        <Button label="Login" onClick={useCallback(() => handleLogin(email, password))} />
 
-                                            <div className="col-md-6">
-                                                <input id="password" type="password" className="form-control" name="password" value={password} onChange={onChangePassword} required autoComplete="current-password"></input>
-
-                                                <span className="invalid-feedback" role="alert">
-                                                    <strong> invalid password </strong>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mb-3">
-                                            <div className="col-md-6 offset-md-4">
-                                                <div className="form-check">
-                                                    <input className="form-check-input" type="checkbox" name="remember" id="remember" ></input>
-
-                                                    <label className="form-check-label" htmlFor="remember">
-                                                        Remember Me
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mb-0">
-                                            <div className="col-md-8 offset-md-4">
-                                                <button type="submit" className="btn btn-primary" onClick={useCallback(() => handleLogin(email, password))}>
-                                                    Login
-                                                </button>
-
-                                                <a className="btn btn-link" href="#" onClick={()=> navigate("./password/email")}>
-                                                    Forgot Your Password?
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <LinkButton label="Forgot Your Password?" onClick={()=> navigate("./password/email")} />
                     </div>
-                </main>
-            </div>
+                </div>
+            </Card>
+        </div>
         </>
     )
 } 

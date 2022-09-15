@@ -1,6 +1,11 @@
 import { useCallback, useState } from "react";
+import { Button } from "../components/button/Button";
+import { Card } from "../components/Card";
 import { Header } from "../components/Header"
-import { useAxios } from "../components/useAxios";
+import { EmailTextbox } from "../components/textbox/EmailTextbox";
+import { NameTextbox } from "../components/textbox/NameTextbox";
+import { PasswordTextbox } from "../components/textbox/PasswordTextbox";
+import { useAxios } from "../function/useAxios";
 
 export const Register = () => {
 
@@ -25,75 +30,32 @@ export const Register = () => {
 
     return (
         <>
+        <div id="app">
             <Header/>
-            <div className="app">
-                <main className="py-4">
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <div className="col-md-8">
-                                <div className="card">
-                                    <div className="card-header">Register</div>
+            <Card cardTitle="Register">
+                <NameTextbox label="Name" onChange={onChangeName}>
+                    {name}
+                </NameTextbox>
 
-                                    <div className="card-body was-validated" noValidate>
+                <EmailTextbox label="Email Address" onChange={onChangeEmail}>
+                    {email}                                        
+                </EmailTextbox> 
 
-                                        <div className="row mb-3">
-                                            <label htmlFor="name" className="col-md-4 col-form-label text-md-end">Name</label>
+                <PasswordTextbox label="Password" onChange={onChangePassword}>
+                    {password}
+                </PasswordTextbox>
 
-                                            <div className="col-md-6">
-                                                <input id="name" type="text" className="form-control" name="name" value={name} onChange={onChangeName} required autoComplete="name" autoFocus></input>
+                <PasswordTextbox label="Confirm Password" onChange={onChangePassword2}>
+                    {password2}
+                </PasswordTextbox>
 
-                                                    <span className="invalid-feedback" role="alert">
-                                                        <strong>invalid name</strong>
-                                                    </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mb-3">
-                                            <label htmlFor="email" className="col-md-4 col-form-label text-md-end">Email Address</label>
-
-                                            <div className="col-md-6">
-                                                <input id="email" type="email" className="form-control" name="email" value={email} onChange={onChangeEmail} required autoComplete="email"></input>
-
-                                                    <span className="invalid-feedback" role="alert">
-                                                        <strong>invalid  email address</strong>
-                                                    </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mb-3">
-                                            <label htmlFor="password" className="col-md-4 col-form-label text-md-end">Password</label>
-
-                                            <div className="col-md-6">
-                                                <input id="password" type="password" className="form-control" name="password" value={password} onChange={onChangePassword} required autoComplete="new-password"></input>
-
-                                                    <span className="invalid-feedback" role="alert">
-                                                        <strong>invalid password</strong>
-                                                    </span>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mb-3">
-                                            <label htmlFor="password-confirm" className="col-md-4 col-form-label text-md-end">Confirm Password</label>
-
-                                            <div className="col-md-6">
-                                                <input id="password-confirm" type="password" className="form-control" name="password_confirmation" value={password2} onChange={onChangePassword2} required autoComplete="new-password"></input>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mb-0">
-                                            <div className="col-md-6 offset-md-4">
-                                                <button type="submit" className="btn btn-primary" onClick={useCallback(() => handleRegister(name, email, password))}>
-                                                    Register
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div className="row mb-0">
+                    <div className="col-md-6 offset-md-4">
+                        <Button label="Register" onClick={useCallback(() => handleRegister(name, email, password))} />
                     </div>
-                </main>
-            </div>
+                </div>
+            </Card>
+        </div>
         </>
     )
 }

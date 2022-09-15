@@ -1,9 +1,10 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
+import { Card } from "../components/Card"
 import { Header } from "../components/Header"
-import { userState } from "../components/Recoil"
-import { useAxios } from "../components/useAxios"
+import { userState } from "../function/Recoil"
+import { useAxios } from "../function/useAxios"
 
 
 
@@ -22,23 +23,14 @@ export const Home = () => {
 
     return (
         <>
+        <div id="app">
             <Header/>
-            <div id="app">
-                <main className="py-4">
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <div className="col-md-8">
-                                <div className="card">
-                                    <div className="card-header">Home</div>
-                                    <div className="card-body">
-                                        Hello {userName}!! , Welcome to tokyo
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+
+            <Card cardTitle="Home">
+                Hello {userName}!! , Welcome to tokyo
+            </Card>
+
+        </div>
         </>
     )
 }
