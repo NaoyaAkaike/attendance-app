@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useSetRecoilState } from "recoil";
 import { userState } from "./Recoil";
@@ -6,7 +7,7 @@ import { userState } from "./Recoil";
 export const useAxios = () => {
 
     const navigate = useNavigate();
-    //const { setUserName } = useContext(AuthContext);
+    const [ errorMsg, setErrorMsg ] = useState("");
     const setUserName = useSetRecoilState(userState);
 
     const instance = axios.create({
@@ -23,6 +24,7 @@ export const useAxios = () => {
             .catch((error) => {
                 console.log('未ログイン');
                 console.log(error)
+                setErrorMsg(error.response.data)
                 return "";
             });
     }
@@ -47,6 +49,7 @@ export const useAxios = () => {
                     .catch((error) => {
                         console.log("api login error")
                         console.log(error)
+                        setErrorMsg(error.response.data)
                     })
             })
     };
@@ -73,6 +76,7 @@ export const useAxios = () => {
                     .catch((error) => {
                         console.log("api register error")
                         console.log(error)
+                        setErrorMsg(error.response.data)
                     });
             })
     };
@@ -89,10 +93,13 @@ export const useAxios = () => {
             .catch((error) => {
                 console.log("api logout error")
                 console.log(error)
+                setErrorMsg(error.response.data)
             });
     }
 
     return {
+        errorMsg,
+        setErrorMsg,
         getUser,
         handleLogin,
         handleRegister,

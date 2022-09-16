@@ -10,9 +10,9 @@ export const NameTextbox = (props) => {
             <div className="col-md-6">
             <input id={label} type="text" className="form-control" value={children} onChange={onChange} required autoComplete="name" autoFocus></input>
 
-                <span className="invalid-feedback" role="alert">
+                {/* <span className="invalid-feedback" role="alert">
                     <strong> invalid name </strong>
-                </span>
+                </span> */}
             </div>
         </div>
     )

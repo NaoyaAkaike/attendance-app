@@ -10,9 +10,9 @@ export const EmailTextbox = (props) => {
             <div className="col-md-6">
             <input id={label} type="email" className="form-control" value={children} onChange={onChange} required autoComplete="email" autoFocus></input>
 
-                <span className="invalid-feedback" role="alert">
+                {/* <span className="invalid-feedback" role="alert">
                     <strong> invalid mail address </strong>
-                </span>
+                </span> */}
             </div>
         </div>
     )

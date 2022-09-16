@@ -49,7 +49,8 @@ class ApiAuthController extends Controller
         if ( env('APP_ENV') === 'local' ){
             $email = $request->get('email');
             $password = $request->get('password');
-            return response()->json("User Not Found or password doesn't match. (email:{$email})(password:{$password}) ", Response::HTTP_INTERNAL_SERVER_ERROR);
+            # return response()->json("User Not Found or password doesn't match. (email:{$email})(password:{$password}) ", Response::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json("User Not Found or password doesn't match.", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         else {
             return response()->json("User Not Found or password doesn't match.", Response::HTTP_INTERNAL_SERVER_ERROR);

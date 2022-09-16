@@ -1,3 +1,4 @@
+
 export const PasswordTextbox = (props) => {
 
     const { label, onChange, children } = props;
@@ -9,9 +10,9 @@ export const PasswordTextbox = (props) => {
             <div className="col-md-6">
                 <input id={label} type="password" className="form-control" value={children} onChange={onChange} required autoComplete="current-password"></input>
 
-                <span className="invalid-feedback" role="alert">
+                {/* <span className="invalid-feedback" role="alert">
                     <strong> invalid password </strong>
-                </span>
+                </span> */}
             </div>
         </div>
     )

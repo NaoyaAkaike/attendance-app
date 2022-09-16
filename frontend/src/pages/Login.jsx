@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "../components/button/Button";
@@ -13,7 +14,7 @@ export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { handleLogin } =useAxios();
+    const { errorMsg, setErrorMsg, handleLogin } =useAxios();
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -21,7 +22,10 @@ export const Login = () => {
     const onChangePassword = (e) => {
         setPassword(e.target.value);
     }
-
+    useEffect(() => {
+        setErrorMsg();
+    },[])
+    //console.log(errorMsg)
     return (
         <>
         <div id="app">
@@ -37,10 +41,18 @@ export const Login = () => {
                 </PasswordTextbox>
 
                 <LabeledCheckBox label="Remember Me" />
+                { errorMsg && (
+                    <div className="row mb-3">
+                        <div className="col-md-8 offset-md-4">
+                            <strong className="text-danger"> {errorMsg} </strong>
+                        </div>
+                    </div>
+                )}
+                
 
                 <div className="row mb-0">
                     <div className="col-md-8 offset-md-4">
-                        <Button label="Login" onClick={useCallback(() => handleLogin(email, password))} />
+                        <Button label="Login" onClick={useCallback(() => handleLogin(email, password))}/>
 
                         <LinkButton label="Forgot Your Password?" onClick={()=> navigate("./password/email")} />
                     </div>

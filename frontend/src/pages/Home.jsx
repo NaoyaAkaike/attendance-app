@@ -13,13 +13,14 @@ export const Home = () => {
     const [ userName, setUserName ] = useRecoilState(userState);
     const navigate = useNavigate();
     const { getUser } = useAxios();
-
-    useEffect(() => {
-        getUser().then((name) => {
-            setUserName(name)
-        })
-        !userName && navigate("/")
-    },[])
+    
+    // ページごとの認証 
+    // useEffect(() => {
+    //     getUser().then((name) => {
+    //         setUserName(name)
+    //     })
+    //     !userName && navigate("/")
+    // },[])
 
     return (
         <>

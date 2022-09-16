@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "../components/button/Button";
 import { Card } from "../components/Card";
 import { Header } from "../components/Header"
@@ -13,7 +13,7 @@ export const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-    const { handleRegister } = useAxios();
+    const { errorMsg, setErrorMsg ,handleRegister } = useAxios();
 
     const onChangeName = (e) => {
         setName(e.target.value)
@@ -27,6 +27,9 @@ export const Register = () => {
     const onChangePassword2 = (e) => {
         setPassword2(e.target.value)
     }
+    useEffect(() => {
+        setErrorMsg();
+    },[])
 
     return (
         <>
@@ -48,6 +51,14 @@ export const Register = () => {
                 <PasswordTextbox label="Confirm Password" onChange={onChangePassword2}>
                     {password2}
                 </PasswordTextbox>
+                
+                { errorMsg && (
+                    <div className="row mb-3">
+                        <div className="col-md-8 offset-md-4">
+                            <strong className="text-danger"> {errorMsg} </strong>
+                        </div>
+                    </div>
+                )}
 
                 <div className="row mb-0">
                     <div className="col-md-6 offset-md-4">
